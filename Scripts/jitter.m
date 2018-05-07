@@ -178,3 +178,35 @@ set(hleg, 'location', 'southwest');
 xlabel('$Ap/\Lambda$', 'interpreter', 'latex');
 ylabel('$\frac{\theta_{rms}}{(\rho_{\infty}/\rho_{SL}) \cdot M^2}$', 'Interpreter', 'Latex');
 title('Normalized $\theta_{rms}$ vs $Ap$, $f_f = 640 \, Hz$', 'interpreter', 'latex');
+
+%%
+
+f_1    = 50000;
+Lambda = 0.1406;
+Uc     = 94.46;
+rho_sl = 1.1574;
+rho_inf = 1.2;
+M = 0.27;
+
+c      = (rho_inf/rho_sl)*(M^2);
+
+
+Ap2 = 0:1e-6:2;
+rmsb = B_forced2(Lambda, Ap2);
+
+yy = rmsb./c;
+
+figure();
+set(gcf,'units','centimeters','position',[0 0 1.2*8 8]);
+semilogy(Ap2/Lambda, (1/23.5).*yy);
+hold on; 
+semilogy(Ap, y);
+xlim([0 10]);
+ylim([10^-3 10^2]);
+
+hleg = legend('Sinusoidal Model', 'Experimental');
+set(hleg, 'interpreter', 'latex');
+set(hleg, 'location', 'northeast');
+xlabel('$Ap/\Lambda$', 'interpreter', 'latex');
+ylabel('$\frac{\theta_{rms}}{(\rho_{\infty}/\rho_{SL}) \cdot M^2}$', 'Interpreter', 'Latex');
+title('Normalized $\theta_{rms}$ vs $Ap$, $f_f = 640 \, Hz$', 'interpreter', 'latex');
